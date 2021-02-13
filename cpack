@@ -1,0 +1,41 @@
+#!/bin/bash
+
+#cleanup
+rm cpack.$1 2> /dev/null
+if [ $? -eq 0 ]
+then
+    echo "Removed existing file cpack.$1"
+fi
+rm out.$1 2> /dev/null
+if [ $? -eq 0 ]
+then
+    echo "Removed existing file out.$1"
+fi
+
+#finding flags
+full_path=$(realpath $0)
+dir_path=$(dirname $full_path)
+flags=$(sed -z 's/\n/ /g' $dir_path/flags)
+
+
+#source packaging
+g++ -E -D"COMP_PROG_DEPLOY" $1  | sed 's/#pragma DELETETHISPREFIX//g' | sed '/^#.*/d' > cpack.$1
+if [ $? -ne 0 ]
+then
+    echo "[FAIL] Packaging of cpack.$1 failed!"
+    exit;
+else
+    echo "Packaging of cpack.$1 done!"
+fi
+
+#compiling
+echo "Using flags: $flags"
+g++ $flags cpack.$1 -o out.$1
+if [ $? -ne 0 ]
+then
+    echo "[FAIL] Compilation of cpack.$1 failed!"
+    rm cpack.$1
+    exit;
+else
+    echo "Compilation of cpack.$1 done!"
+fi
