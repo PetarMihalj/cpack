@@ -51,4 +51,4 @@ Even though the system libraries are included in a custom format on a source fil
 Check out the source [repo](https://github.com/PetarMihalj/cpack_lib_example), in which I describe how to create a library compatible with this system.
 
 ### Contact
-Feel free to contact me with suggestions, questions, etc, at *petar.mihalj.other ATSIGN pm.me*   
+Feel free to contact me with suggestions, questions, etc, at *petar.mihalj.other ATCHAR pm.me*   
