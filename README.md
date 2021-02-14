@@ -1,6 +1,6 @@
 # cpack
 
-Cpack is a competitive programming helper tool, which packages included libraries into a single file, suitable for online judges.
+Cpack is a competitive programming helper tool, which packages the main source file along with included libraries into a single file, suitable for online judges.
 
 ### The problem:
 
