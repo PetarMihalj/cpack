@@ -31,13 +31,15 @@ Packaging of source done!   (largest_lex_rot.cpp.cpack.cpp)
 
 As you can see, cpack both compiles the source using standard flags you can edit, and also packages the source for submission to online judges.
 
-These sources can be found in the other [repo](https://github.com/PetarMihalj/cpack_lib_example), where you can see both the original source and the resoluting packaged file.
+These sources can be found in the other [repo](https://github.com/PetarMihalj/cpack_lib_example), where you can see both the original source and the resulting packaged file.
 
 ### Limitations:
 
 The main limitation of this system is that it has to decide whether to include a file or not, and this has to be specified manually. This has to be done since some headers are non portable, and can't be expanded on your local pc and then submitted to online judges. 
 
-Check out the `cpack_common.hpp` file; this is how you should include system dependant files (for example `bits/stdc++.h`). Having them wrapped in this format is neccesary for cpack to ignore them while packaging your source. Alternatively, just include the `cpack_common.hpp`; this should be enough for all competitive programming use cases.
+Check out the `cpack_common.hpp` file; this is how you should include system dependant files (for example `bits/stdc++.h`). Having them wrapped in this format is necessary for cpack to ignore them while packaging your source. Alternatively, just include the `cpack_common.hpp`; this should be enough for all competitive programming use cases.
+
+Even though the system libraries are included in a custom format on a source file level, this format is compatible with modern language servers; you will still get your IDE completition, as long as you have `cpack_common.hpp` included properly. Alternatively, just copy `cpack_common.hpp` in your library folder (check out the last paragraph for an example).
 
 ### Setup: (tested on linux system with gcc 10.2.0 and bash 5.1.0)
 
