@@ -10,7 +10,7 @@ So you may want to try to split them, but here competitive programming hits you;
 
 # The solution:
 
-Cpack attempts to cure this problem, by providing a standard script which can preprocess the file and include all needed files.
+Cpack attempts to cure this problem, by providing a standard script which can preprocess the main source file and include all needed libraries.
 It makes use of standard gcc preprocessor to ensure all preprocessor directives work well, including #pregma once (commonly used for libraries).
 
 Usage example:
@@ -35,7 +35,9 @@ These sources can be found in the other [repo](https://github.com/PetarMihalj/cp
 
 # Limitations:
 
-The main limitation of this system is that it has to decide whether to include a file or not, and this has to be specified manually. Check out the cpack_common.hpp file; this is how you should include system dependant files (for example bits/stdc++.h). Having them wrapped in this format is neccesary for cpack to ignore them while packaging your source. Alternatively, just include the cpack_common.hpp file; this should be enough for all competitive programming use cases.
+The main limitation of this system is that it has to decide whether to include a file or not, and this has to be specified manually. This has to be done since some headers are non portable, and can't be expanded on your local pc and then submitted to online judges. 
+
+Check out the cpack_common.hpp file; this is how you should include system dependant files (for example bits/stdc++.h). Having them wrapped in this format is neccesary for cpack to ignore them while packaging your source. Alternatively, just include the cpack_common.hpp file; this should be enough for all competitive programming use cases.
 
 # Setup: (tested on linux system with gcc 10.2.0 and bash 5.1.0)
 
