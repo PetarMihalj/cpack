@@ -50,9 +50,8 @@ else
 fi
 
 #source packaging
-g++ -E -D"COMP_PROG_DEPLOY" $1  |\
-    sed 's/#pragma DELETETHISPREFIX//g' |\
-    sed '/^#.*/d' > $packname 
+g++ -E -P -D"COMP_PROG_DEPLOY" $1  |\
+    sed 's/#pragma DELETETHISPREFIX//g' > $packname
 if [ $? -ne 0 ]
 then
     echo "[FAIL] Packaging of source failed!"
