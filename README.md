@@ -29,7 +29,7 @@ Compilation of source done! (largest_lex_rot.out)
 Packaging of source done!   (largest_lex_rot.cpp.cpack.cpp)
 ~~~
 
-As you can see, cpack both compiles the file using standard flags you can edit, and also packages the file for submission to online judges.
+As you can see, cpack both compiles the source using standard flags you can edit, and also packages the source for submission to online judges.
 
 These sources can be found in the other [repo](https://github.com/PetarMihalj/cpack_lib_example), where you can see both the original source and the resoluting packaged file.
 
