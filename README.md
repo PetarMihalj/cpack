@@ -10,7 +10,7 @@ So you may want to try to split them, but here competitive programming hits you;
 
 ### The solution
 
-The next shell block contains your main source file which uses system library `bits/stdc++.h` and your own library `example_header.hpp`. Libraries you don't want packaged must be specified in a protected block, check out the example. This block will allow language servers to function properly while you develop the source, and prevent cpack from packaging system headers, which would prevent portability. 
+The next shell block contains your main source file which uses system libraries `bits/stdc++.h` and `algorithm` and your own library `example_header.hpp`. Libraries you don't want packaged must be specified in a protected block, check out the example. This block will allow language servers to function properly while you develop the source, and prevent cpack from packaging system headers, which would prevent portability. 
 
 ~~~shell
 $ cat example_main_source.cpp
@@ -81,7 +81,7 @@ $ ./a.out
 42
 ~~~
 
-The main limitation of this system is that it has to decide whether to include a file or not, and this has to be specified manually. This has to be done since some headers are non portable, and can't be expanded on your local pc and then submitted to online judges. 
+The main limitation of this system is that you have to decide whether to include a header file or not. This has to be done since some headers are non-portable, and can't be expanded on your local pc and then submitted to online judges. 
 
 ### Setup: (tested on linux system with gcc 10.2.0 and bash 5.1.0)
 
