@@ -1,10 +1,5 @@
 #!/bin/bash
 
-#flag setup 
-full_path=$(realpath $0)
-dir_path=$(dirname $full_path)
-flags=$(sed -z 's/\n/ /g' $dir_path/flags)
-
 #file validity checks
 if [ "$#" -ne 1 ]
 then
@@ -21,33 +16,6 @@ fi
 
 #names setup
 packname=$1.cpack.cpp
-outname=$(echo $1 | cut -f1 -d".").out
-
-#cleanup
-rm $packname 2> /dev/null
-if [ $? -eq 0 ]
-then
-    echo "Removed existing file $packname"
-fi
-rm $outname 2> /dev/null
-if [ $? -eq 0 ]
-then
-    echo "Removed existing file $outname"
-fi
-
-#compiling source
-echo "Using flags: $flags"
-echo 
-
-g++ $flags $1 -o $outname
-echo
-if [ $? -ne 0 ]
-then
-    echo "[FAIL] Compilation of source failed!"
-    exit 1
-else
-    echo "Compilation of source done! ($outname)"
-fi
 
 #source packaging
 g++ -E -P -D"COMP_PROG_DEPLOY" $1  |\
@@ -55,7 +23,6 @@ g++ -E -P -D"COMP_PROG_DEPLOY" $1  |\
 if [ $? -ne 0 ]
 then
     echo "[FAIL] Packaging of source failed!"
-    rm $outname
     exit 1
 else
     echo "Packaging of source done!   ($packname)"

@@ -16,17 +16,43 @@ It makes use of standard gcc preprocessor to ensure all preprocessor directives 
 Usage example:
 
 ~~~shell
-$ cpack largest_lex_rot.cpp
-Removed existing file largest_lex_rot.cpp.cpack.cpp
-Using flags: -g -Wall
+$ cat example_main_source.cpp
+// this is how you include a system library
+#ifdef COMP_PROG_DEPLOY
+#pragma DELETETHISPREFIX #include <bits/stdc++.h>
+#else
+#include <bits/stdc++.h>
+#endif
 
-largest_lex_rot.cpp: In function ‘int main()’:
-largest_lex_rot.cpp:21:20: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::__cxx11::basic_string<char>::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
-   21 |             if (loc>=s.size()/2) loc=0;
-      |                 ~~~^~~~~~~~~~~~
+// this is how you include your own library you want unpacked
+#include "example_header.hpp"
 
-Compilation of source done! (largest_lex_rot.out)
-Packaging of source done!   (largest_lex_rot.cpp.cpack.cpp)
+using namespace std;
+
+int main(){
+    cout << header_fn() << endl;
+}
+$ cat example_header.hpp
+#pragma once
+
+int header_fn(){
+    return 42;
+}
+$ cpack example_main_source.cpp
+Packaging of source done!   (example_main_source.cpp.cpack.cpp)
+$ cat example_main_source.cpp.cpack.cpp
+ #include <bits/stdc++.h>
+
+int header_fn(){
+    return 42;
+}
+using namespace std;
+int main(){
+    cout << header_fn() << endl;
+}
+$ g++ example_main_source.cpp.cpack.cpp
+$ ./a.out
+42
 ~~~
 
 As you can see, cpack both compiles the source using standard flags you can edit, and also packages the source for submission to online judges.
