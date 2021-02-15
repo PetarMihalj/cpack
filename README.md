@@ -88,5 +88,17 @@ The main limitation of this system is that you have to decide whether to include
 1. Download/clone the repo (or just the `cpack` script) into some folder
 2. Add a symbolic link to the `cpack` script or alias it in your `.bashrc`
 
+### How to include headers from other locations?
+
+Add your location to default search path in current shell:
+
+~~~shell
+$ ls
+example_main_source.cpp
+$ export CPLUS_INCLUDE_PATH=~/my_library_location/
+$ cpack example_main_source.cpp
+Packaging of source done!   (example_main_source.cpp.cpack.cpp)
+~~~
+
 ### Contact
 Feel free to contact me with suggestions, questions, etc, at *petar.mihalj.other ATCHAR pm.me*   
