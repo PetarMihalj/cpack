@@ -46,6 +46,7 @@ Also, check out the simple header for demonstration purposes. Notice that it use
 
 ~~~shell
 $ cat example_header.hpp
+
 #pragma once
 
 int header_fn(){
@@ -61,6 +62,7 @@ Packaging of source done!   (example_main_source.cpp.cpack.cpp)
 
 $ cat example_main_source.cpp.cpack.cpp
  #include <bits/stdc++.h>
+ #include <algorithm>
 
 int header_fn(){
     return 42;
