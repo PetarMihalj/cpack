@@ -15,7 +15,7 @@ The next shell block contains your main source file which uses system libraries 
 ~~~shell
 $ cat example_main_source.cpp
 
-// this is how you include a system library
+// this is how you include a system library, you don't want packaged
 #ifdef COMP_PROG_DEPLOY
 #pragma DELETETHISPREFIX #include <bits/stdc++.h>
 #else
@@ -29,7 +29,7 @@ $ cat example_main_source.cpp
 #include <algorithm>
 #endif
 
-// this is how you include your own library you want unpacked
+// this is how you include your own library you want packaged
 #include "example_header.hpp"
 
 //twice to demonstrate functionality of #pragma once
