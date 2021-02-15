@@ -10,13 +10,11 @@ So you may want to try to split them, but here competitive programming hits you;
 
 ### The solution
 
-Cpack attempts to cure this problem, by providing a standard script which can preprocess the main source file and include all needed libraries.
-It makes use of standard gcc preprocessor to ensure all preprocessor directives work well, including `#pragma once` (commonly used for libraries).
-
-Usage example:
+The next shell block contains your main source file which uses system library `bits/stdc++.h` and your own library `example_header.hpp`. Libraries you don't want packaged must be specified in a protected block, check out the example. This block will allow language servers to function properly while you develop the source, and prevent cpack from packaging system headers, which would prevent portability. 
 
 ~~~shell
 $ cat example_main_source.cpp
+
 // this is how you include a system library
 #ifdef COMP_PROG_DEPLOY
 #pragma DELETETHISPREFIX #include <bits/stdc++.h>
@@ -24,22 +22,43 @@ $ cat example_main_source.cpp
 #include <bits/stdc++.h>
 #endif
 
+// one more system library, just for the demo
+#ifdef COMP_PROG_DEPLOY
+#pragma DELETETHISPREFIX #include <algorithm>
+#else
+#include <algorithm>
+#endif
+
 // this is how you include your own library you want unpacked
 #include "example_header.hpp"
+
+//twice to demonstrate functionality of #pragma once
+#include "example_header.hpp" 
 
 using namespace std;
 
 int main(){
     cout << header_fn() << endl;
 }
+~~~
+
+Also, check out the simple header for demonstration purposes. Notice that it uses `#pragma once`; since this script uses gcc compiler internally, you can include all your standard preprocessor functions and they will function properly. 
+
+~~~shell
 $ cat example_header.hpp
 #pragma once
 
 int header_fn(){
     return 42;
 }
+~~~
+
+Run cpack utility and observe the packaged source, which can be easily submitted to online judges.
+
+~~~shell
 $ cpack example_main_source.cpp
 Packaging of source done!   (example_main_source.cpp.cpack.cpp)
+
 $ cat example_main_source.cpp.cpack.cpp
  #include <bits/stdc++.h>
 
@@ -50,31 +69,22 @@ using namespace std;
 int main(){
     cout << header_fn() << endl;
 }
+~~~
+
+Compiling and running the packaged source.
+
+~~~shell
 $ g++ example_main_source.cpp.cpack.cpp
 $ ./a.out
 42
 ~~~
 
-As you can see, cpack both compiles the source using standard flags you can edit, and also packages the source for submission to online judges.
-
-These sources can be found in the other [repo](https://github.com/PetarMihalj/cpack_lib_example), where you can see both the original source and the resulting packaged file.
-
-### Limitations
-
 The main limitation of this system is that it has to decide whether to include a file or not, and this has to be specified manually. This has to be done since some headers are non portable, and can't be expanded on your local pc and then submitted to online judges. 
-
-Check out the `cpack_common.hpp` file; this is how you should include system dependant files (for example `bits/stdc++.h`). Having them wrapped in this format is necessary for cpack to ignore them while packaging your source. Alternatively, just include the `cpack_common.hpp`; this should be enough for all competitive programming use cases.
-
-Even though the system libraries are included in a custom format on a source file level, this format is compatible with modern language servers; you will still get your IDE completition, as long as you have `cpack_common.hpp` included properly. Alternatively, just copy `cpack_common.hpp` in your library folder (check out the last paragraph for an example).
 
 ### Setup: (tested on linux system with gcc 10.2.0 and bash 5.1.0)
 
-1. Download/clone the repo into some folder
+1. Download/clone the repo (or just the `cpack` script) into some folder
 2. Add a symbolic link to the `cpack` script or alias it in your `.bashrc`
-3. (optional) Change compilation flags in the flags file
-
-### How to build a library around this?
-Check out the source [repo](https://github.com/PetarMihalj/cpack_lib_example), in which I describe how to create a library compatible with this system.
 
 ### Contact
 Feel free to contact me with suggestions, questions, etc, at *petar.mihalj.other ATCHAR pm.me*   
