@@ -1,9 +1,9 @@
 #!/bin/bash
 
 #file validity checks
-if [ "$#" -ne 1 ]
+if [ "$#" -ne 1 ] && [ "$#" -ne 2 ]
 then
-  echo "Usage: cpack <source file>"
+  echo "Usage: cpack <source file> [<dest file>]"
   exit 1
 fi  
 
@@ -15,7 +15,12 @@ else
 fi  
 
 #names setup
-packname=$1.cpack.cpp
+if [ "$#" -eq 2 ]
+then
+    packname=$2
+else
+    packname=$1.cpack.cpp
+fi
 
 #source packaging
 g++ -E -P -D"COMP_PROG_DEPLOY" $1  |\
