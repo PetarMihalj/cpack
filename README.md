@@ -12,7 +12,7 @@ So you may want to try to split them, but here competitive programming hits you;
 
 The next shell block contains your main source file which uses system libraries `bits/stdc++.h` and `algorithm` and your own library `example_header.hpp`. Libraries you don't want packaged must be specified in a protected block, check out the example. This block will allow language servers to function properly while you develop the source, and prevent cpack from packaging system headers, which would prevent portability. 
 
-~~~shell
+~~~cpp
 $ cat example_main_source.cpp
 
 // this is how you include a system library, you do not want packaged
@@ -44,7 +44,7 @@ int main(){
 
 Also, check out the simple header for demonstration purposes. Notice that it uses `#pragma once`; since this script uses gcc compiler internally, you can include all your standard preprocessor functions and they will function properly. 
 
-~~~shell
+~~~cpp
 $ cat example_header.hpp
 
 #pragma once
