@@ -15,7 +15,7 @@ The next shell block contains your main source file which uses system libraries 
 ~~~shell
 $ cat example_main_source.cpp
 
-// this is how you include a system library, you don't want packaged
+// this is how you include a system library, you do not want packaged
 #ifdef COMP_PROG_DEPLOY
 #pragma DELETETHISPREFIX #include <bits/stdc++.h>
 #else
