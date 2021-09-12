@@ -101,4 +101,4 @@ Packaging of source done!   (example_main_source.cpp.cpack.cpp)
 ~~~
 
 ### Contact
-Feel free to contact me with suggestions, questions, etc, at *cpack ATCHAR pmihalj.com*   
+Feel free to contact me with suggestions, questions, etc, at *git ATCHAR pmihalj.com*   
